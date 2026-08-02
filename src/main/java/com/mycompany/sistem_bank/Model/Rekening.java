@@ -58,7 +58,7 @@ public abstract class Rekening implements PenghitungBunga{
     public void tampilkanInfo(){
         System.out.println("Nomor Rekening : " + nomorRekening);
         System.out.println("Nama Pemilik   : " + namaPemilik);
-        System.out.println("Saldo          : Rp " + saldo);
+        System.out.printf("Saldo : Rp %,.2f%n",+ saldo);
     }
     @Override
     public abstract double hitungBunga();
