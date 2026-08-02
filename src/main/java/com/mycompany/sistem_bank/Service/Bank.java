@@ -4,10 +4,10 @@
  */
 package com.mycompany.sistem_bank.Service;
 
-/**
- *
- * @author hp
- */
+import java.util.ArrayList;
+import com.mycompany.sistem_bank.Model.Nasabah;
+import com.mycompany.sistem_bank.Model.Transaksi;
+
 public class Bank {
     
 }
