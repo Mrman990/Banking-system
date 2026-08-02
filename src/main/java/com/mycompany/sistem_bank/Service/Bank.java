@@ -10,4 +10,34 @@ import com.mycompany.sistem_bank.Model.Transaksi;
 
 public class Bank {
     
+    private ArrayList<Nasabah> daftarNasabah;
+    private ArrayList<Transaksi> daftarTransaksi;
+    
+    public Bank(){
+        daftarNasabah = new ArrayList<>();
+        daftarTransaksi = new ArrayList<>();
+    }
+        
+    public void tambahNasabah(Nasabah nasabah){
+        daftarNasabah.add(nasabah);
+    }
+    
+    public Nasabah cariNasabah(String username){
+        for(Nasabah nasabah : daftarNasabah){
+            if(nasabah.getUsername().equals(username)){
+                return nasabah;
+            }
+        }
+        return null;
+    }
+    
+    public void tambahTransaksi(Transaksi transaksi){
+        daftarTransaksi.add(transaksi);
+    }
+    public ArrayList<Nasabah> getDaftarNasabah(){
+        return daftarNasabah;
+    }
+    public ArrayList<Transaksi> getDaftarTransaksi(){
+        return daftarTransaksi;
+    }
 }
