@@ -4,10 +4,14 @@
  */
 package com.mycompany.sistem_bank.Model;
 
-/**
- *
- * @author hp
- */
+
 public class Transaksi {
+    private String idTransaksi;
+    private String jenis;
+    private double jumlah;
+    private String tanggal;
     
+       public Transaksi(String idTransaksi, String jenis, double jumlah, String tanggal){
+           
+       }
 }
