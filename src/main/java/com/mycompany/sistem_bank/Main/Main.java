@@ -26,7 +26,6 @@ public class Main {
         Nasabah hasil = auth.login("Kurji Olie", "12345");
         hasil = auth.login("Kobo", "1232");
     
-        
         if(hasil != null){
             System.out.println("Login Berhasil");
             System.out.println("Selamat Datang " + hasil.getUsername());
