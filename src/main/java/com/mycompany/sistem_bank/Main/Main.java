@@ -9,6 +9,7 @@ import com.mycompany.sistem_bank.Model.Rekening;
 import com.mycompany.sistem_bank.Model.RekeningTabungan;
 import com.mycompany.sistem_bank.Service.AuthService;
 import com.mycompany.sistem_bank.Service.Bank;
+import com.mycompany.sistem_bank.View.LoginFrame;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,17 +23,10 @@ public class Main {
     
         bank.tambahNasabah(nasabah);
         bank.tambahNasabah(nasabah_2);
-        AuthService auth = new AuthService(bank);
-        Nasabah hasil = auth.login("Kurji Olie", "12345");
-        hasil = auth.login("Kobo", "1232");
-
         
-        if(hasil != null){
-            System.out.println("Login Berhasil");
-            System.out.println("Selamat Datang " + hasil.getUsername());
-            hasil.getRekening().tampilkanInfo();
-        }else{
-            System.out.println("Login Gagal");
-        }
+        AuthService auth = new AuthService(bank);
+        LoginFrame loginFrame = new LoginFrame(auth);
+        loginFrame.setVisible(true);
+        loginFrame.setLocationRelativeTo(null);
     }
 }

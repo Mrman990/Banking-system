@@ -4,19 +4,16 @@
  */
 package com.mycompany.sistem_bank.View;
 
-/**
- *
- * @author hp
- */
-public class DashboardFrame extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardFrame.class.getName());
+import com.mycompany.sistem_bank.Model.Nasabah;
 
-    /**
-     * Creates new form DashboardFrame
-     */
-    public DashboardFrame() {
+public class DashboardFrame extends javax.swing.JFrame {
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardFrame.class.getName());
+    private Nasabah nasabah;
+
+    public DashboardFrame(Nasabah nasabah){
         initComponents();
+        this.nasabah = nasabah;
+        setTitle("Dashboard Sistem Bank");
     }
 
     /**
@@ -48,25 +45,7 @@ public class DashboardFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DashboardFrame().setVisible(true));
+      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
