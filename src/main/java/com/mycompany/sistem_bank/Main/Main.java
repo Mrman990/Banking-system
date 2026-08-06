@@ -15,11 +15,11 @@ public class Main {
     public static void main(String[] args) {
         Bank bank = new Bank();
     
-        Rekening rekening = new RekeningTabungan("01", "Miku", 10000000, 3);
-        Rekening rekening_2 = new RekeningTabungan("02", "Teto", 1000, 3);
+        Rekening rekening = new RekeningTabungan("01", "Mrman", 10000000, 3);
+        Rekening rekening_2 = new RekeningTabungan("02", "olle", 1000, 3);
     
-        Nasabah nasabah = new Nasabah("N001", "Kurji Olie", "12345", rekening);
-        Nasabah nasabah_2 = new Nasabah("N002", "Kobo", "1232", rekening_2);
+        Nasabah nasabah = new Nasabah("N001", "Mrman", "556123", rekening);
+        Nasabah nasabah_2 = new Nasabah("N002", "Kureji Olle", "122336", rekening_2);
     
         bank.tambahNasabah(nasabah);
         bank.tambahNasabah(nasabah_2);
