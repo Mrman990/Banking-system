@@ -4,19 +4,38 @@
  */
 package com.mycompany.sistem_bank.View;
 
-/**
- *
- * @author hp
- */
+import com.mycompany.sistem_bank.Model.Nasabah;
+import com.mycompany.sistem_bank.Service.Bank;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class TransferFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TransferFrame.class.getName());
+    private Nasabah nasabah;
+    private Bank bank;
 
-    /**
-     * Creates new form TransferFrame
-     */
-    public TransferFrame() {
+    public TransferFrame(Bank bank, Nasabah nasabah) {
         initComponents();
+        this.nasabah = nasabah;
+        this.bank = bank;
+        NomorRekening.setEditable(false);
+        SaldoSaatini.setEditable(false);
+        NamaPenerima.setEditable(false);
+        Jumlahtransfer.setEditable(true);
+        bank.cariRekening(nomorRekening);
+        setTitle("Transfer Antar Rekening");
+        
+        NomorRekening.setText(
+                nasabah.getRekening().getNomorRekening()
+        );
+        
+        NumberFormat rupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        rupiah.setMaximumFractionDigits(0);
+        rupiah.setMinimumFractionDigits(0);
+        SaldoSaatini.setText(
+                rupiah.format(nasabah.getRekening().getSaldo())
+        );
     }
 
     /**
@@ -28,47 +47,165 @@ public class TransferFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        NomorRekening = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        SaldoSaatini = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        Jumlahtransfer = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        NamaPenerima = new javax.swing.JTextField();
+        Batal = new javax.swing.JButton();
+        Transfer = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
+        jLabel1.setText("Form transfer");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        jLabel2.setText("Rekening Pengirim");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jLabel3.setText("Saldo saat ini");
+
+        NomorRekening.addActionListener(this::NomorRekeningActionPerformed);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jLabel4.setText("Nomor rekening");
+
+        SaldoSaatini.addActionListener(this::SaldoSaatiniActionPerformed);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        jLabel5.setText("Rekening Tujuan");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jLabel6.setText("Nama penerima");
+
+        Jumlahtransfer.addActionListener(this::JumlahtransferActionPerformed);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
+        jLabel7.setText("Jumlah transfer");
+
+        NamaPenerima.addActionListener(this::NamaPenerimaActionPerformed);
+
+        Batal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Batal.setText("Batal");
+        Batal.addActionListener(this::BatalActionPerformed);
+
+        Transfer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Transfer.setText("Transfer");
+        Transfer.addActionListener(this::TransferActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(NomorRekening, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(SaldoSaatini, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(Jumlahtransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(NamaPenerima, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(Transfer)
+                        .addGap(57, 57, 57)
+                        .addComponent(Batal)))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NomorRekening, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SaldoSaatini, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NamaPenerima, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Jumlahtransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Batal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void NomorRekeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorRekeningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomorRekeningActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TransferFrame().setVisible(true));
+    private void SaldoSaatiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaldoSaatiniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaldoSaatiniActionPerformed
+
+    private void JumlahtransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JumlahtransferActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JumlahtransferActionPerformed
+
+    private void NamaPenerimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaPenerimaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NamaPenerimaActionPerformed
+
+    private void BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BatalActionPerformed
+
+    }//GEN-LAST:event_BatalActionPerformed
+
+    private void TransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferActionPerformed
+       
+    }//GEN-LAST:event_TransferActionPerformed
+
+
+    public static void main(String args[]) {
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Batal;
+    private javax.swing.JTextField Jumlahtransfer;
+    private javax.swing.JTextField NamaPenerima;
+    private javax.swing.JTextField NomorRekening;
+    private javax.swing.JTextField SaldoSaatini;
+    private javax.swing.JButton Transfer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

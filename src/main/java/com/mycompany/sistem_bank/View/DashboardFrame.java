@@ -5,16 +5,19 @@
 package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Model.Nasabah;
+import com.mycompany.sistem_bank.Service.Bank;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class DashboardFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardFrame.class.getName());
     private Nasabah nasabah;
+    private Bank bank;
 
     public DashboardFrame(Nasabah nasabah){
         initComponents();
         this.nasabah = nasabah;
+        this.bank = bank;
         NamaUser.setEditable(false);
         NomorRekening.setEditable(false);
         Saldo.setEditable(false);
@@ -217,7 +220,10 @@ public class DashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_TarikActionPerformed
 
     private void TransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferActionPerformed
-        // TODO add your handling code here:
+        TransferFrame transfer = new TransferFrame(bank, nasabah);
+        transfer.setLocationRelativeTo(null);
+        transfer.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_TransferActionPerformed
 
     private void RiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RiwayatActionPerformed

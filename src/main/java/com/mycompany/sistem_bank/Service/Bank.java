@@ -31,6 +31,15 @@ public class Bank {
         return null;
     }
     
+    public Nasabah cariRekening(String nomorRekening){
+        for(Nasabah i : daftarNasabah){
+            if(i.getRekening().getNomorRekening().equals(nomorRekening)){
+                return i;
+            }
+        }
+        return null;
+    }
+    
     public void tambahTransaksi(Transaksi transaksi){
         daftarTransaksi.add(transaksi);
     }
