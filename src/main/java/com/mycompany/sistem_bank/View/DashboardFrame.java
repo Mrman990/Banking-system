@@ -6,6 +6,7 @@ package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Model.Nasabah;
 import com.mycompany.sistem_bank.Service.Bank;
+import com.mycompany.sistem_bank.Service.AuthService;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -14,7 +15,7 @@ public class DashboardFrame extends javax.swing.JFrame {
     private Nasabah nasabah;
     private Bank bank;
 
-    public DashboardFrame(Nasabah nasabah){
+    public DashboardFrame(Bank bank, Nasabah nasabah){
         initComponents();
         this.nasabah = nasabah;
         this.bank = bank;
@@ -206,14 +207,14 @@ public class DashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_SaldoActionPerformed
 
     private void SetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetorActionPerformed
-        SetorFrame setorFrame = new SetorFrame(nasabah);
+        SetorFrame setorFrame = new SetorFrame(bank,nasabah);
         setorFrame.setLocationRelativeTo(null);
         setorFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SetorActionPerformed
 
     private void TarikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TarikActionPerformed
-       TarikFrame tarikFrame = new TarikFrame(nasabah);
+       TarikFrame tarikFrame = new TarikFrame(bank, nasabah);
        tarikFrame.setLocationRelativeTo(null);
        tarikFrame.setVisible(true);
        this.dispose();
@@ -231,7 +232,11 @@ public class DashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_RiwayatActionPerformed
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        // TODO add your handling code here:
+        AuthService auth = new AuthService(bank);
+        LoginFrame Keluar = new LoginFrame(auth, bank);
+        Keluar.setLocationRelativeTo(null);
+        Keluar.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_LogoutActionPerformed
 
     /**

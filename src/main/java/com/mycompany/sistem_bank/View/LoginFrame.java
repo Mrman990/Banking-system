@@ -5,6 +5,7 @@
 package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Service.AuthService;
+import com.mycompany.sistem_bank.Service.Bank;
 import com.mycompany.sistem_bank.View.DashboardFrame;
 import javax.swing.JOptionPane;
 import com.mycompany.sistem_bank.Model.Nasabah;
@@ -14,10 +15,12 @@ public class LoginFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
     private AuthService authService;
+    private Bank bank;
 
-    public LoginFrame(AuthService authService) {
+    public LoginFrame(AuthService authService, Bank bank) {
         initComponents();
         this.authService = authService;
+        this.bank = bank;
     }
 
     /**
@@ -118,7 +121,7 @@ public class LoginFrame extends javax.swing.JFrame {
         
         if(hasil != null){
              JOptionPane.showMessageDialog(this, "Login Berhasil!\nSelamat Datang " + hasil.getUsername());
-             DashboardFrame dashboard = new DashboardFrame(hasil);
+             DashboardFrame dashboard = new DashboardFrame(bank,hasil);
              dashboard.setLocationRelativeTo(null);
              dashboard.setVisible(true);
              this.dispose();

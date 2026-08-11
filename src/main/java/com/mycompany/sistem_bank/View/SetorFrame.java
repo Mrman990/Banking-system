@@ -5,6 +5,7 @@
 package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Model.Nasabah;
+import com.mycompany.sistem_bank.Service.Bank;
 import javax.swing.JOptionPane;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -13,10 +14,12 @@ public class SetorFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SetorFrame.class.getName());
     private Nasabah nasabah;
+    private Bank bank;
     
-    public SetorFrame(Nasabah nasabah) {
+    public SetorFrame(Bank bank, Nasabah nasabah) {
         initComponents();
         this.nasabah = nasabah;
+        this.bank = bank;
         setTitle("Setor Tunai");
         NomorRekening.setEditable(false);
         NamaPemilik.setEditable(false);
@@ -154,11 +157,14 @@ public class SetorFrame extends javax.swing.JFrame {
             return;
             }
             nasabah.getRekening().setor(jumlah);
+            NumberFormat rupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+            rupiah.setMaximumFractionDigits(0);
+            rupiah.setMinimumFractionDigits(0);
             JOptionPane.showMessageDialog(this,
                     "Setor berhasil!\nSaldo sekarang : Rp " +
-                    nasabah.getRekening().getSaldo());
+                    rupiah.format(nasabah.getRekening().getSaldo()));
             
-            DashboardFrame dashboard = new DashboardFrame(nasabah);
+            DashboardFrame dashboard = new DashboardFrame(bank,nasabah);
             dashboard.setLocationRelativeTo(null);
             dashboard.setVisible(true);
             
@@ -173,7 +179,7 @@ public class SetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_SetorActionPerformed
 
     private void BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BatalActionPerformed
-        DashboardFrame dashboard = new DashboardFrame(nasabah);
+        DashboardFrame dashboard = new DashboardFrame(bank,nasabah);
         dashboard.setLocationRelativeTo(null);
         dashboard.setVisible(true);
         this.dispose();

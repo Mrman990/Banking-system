@@ -5,6 +5,7 @@
 package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Model.Nasabah;
+import com.mycompany.sistem_bank.Service.Bank;
 import javax.swing.JOptionPane;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -13,10 +14,12 @@ public class TarikFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TarikFrame.class.getName());
     private Nasabah nasabah;
+    private Bank bank;
     
-    public TarikFrame(Nasabah nasabah) {
+    public TarikFrame(Bank bank, Nasabah nasabah) {
         initComponents();
         this.nasabah = nasabah;
+        this.bank = bank;
         setTitle("Tarik Tunai");
         
         NomorRekening.setEditable(false);
@@ -155,7 +158,7 @@ public class TarikFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,
                         "Penarikan berhasil!\nSaldo sekarang : Rp "
                         + nasabah.getRekening().getSaldo());
-                DashboardFrame dashboard = new DashboardFrame(nasabah);
+                DashboardFrame dashboard = new DashboardFrame(bank, nasabah);
                 dashboard.setLocationRelativeTo(null);
                 dashboard.setVisible(true); 
             }else{
@@ -173,7 +176,7 @@ public class TarikFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_TarikActionPerformed
 
     private void BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BatalActionPerformed
-        DashboardFrame dashboard = new DashboardFrame(nasabah);
+        DashboardFrame dashboard = new DashboardFrame(bank, nasabah);
         dashboard.setLocationRelativeTo(null);
         dashboard.setVisible(true);
         this.dispose();

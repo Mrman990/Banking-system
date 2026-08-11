@@ -7,6 +7,7 @@ package com.mycompany.sistem_bank.View;
 import com.mycompany.sistem_bank.Model.Nasabah;
 import com.mycompany.sistem_bank.Service.Bank;
 import java.text.NumberFormat;
+import javax.swing.JOptionPane;
 import java.util.Locale;
 
 public class TransferFrame extends javax.swing.JFrame {
@@ -14,18 +15,17 @@ public class TransferFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TransferFrame.class.getName());
     private Nasabah nasabah;
     private Bank bank;
-
+    
     public TransferFrame(Bank bank, Nasabah nasabah) {
         initComponents();
-        this.nasabah = nasabah;
         this.bank = bank;
+        this.nasabah = nasabah;
         NomorRekening.setEditable(false);
         SaldoSaatini.setEditable(false);
         NamaPenerima.setEditable(false);
         Jumlahtransfer.setEditable(true);
-        bank.cariRekening(nomorRekening);
         setTitle("Transfer Antar Rekening");
-        
+    
         NomorRekening.setText(
                 nasabah.getRekening().getNomorRekening()
         );
@@ -37,7 +37,7 @@ public class TransferFrame extends javax.swing.JFrame {
                 rupiah.format(nasabah.getRekening().getSaldo())
         );
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,8 +58,11 @@ public class TransferFrame extends javax.swing.JFrame {
         Jumlahtransfer = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         NamaPenerima = new javax.swing.JTextField();
-        Batal = new javax.swing.JButton();
+        Cari = new javax.swing.JButton();
         Transfer = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        NomorRekeningTujuan = new javax.swing.JTextField();
+        Batal1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,13 +95,22 @@ public class TransferFrame extends javax.swing.JFrame {
 
         NamaPenerima.addActionListener(this::NamaPenerimaActionPerformed);
 
-        Batal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Batal.setText("Batal");
-        Batal.addActionListener(this::BatalActionPerformed);
+        Cari.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Cari.setText("Cari");
+        Cari.addActionListener(this::CariActionPerformed);
 
         Transfer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Transfer.setText("Transfer");
         Transfer.addActionListener(this::TransferActionPerformed);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Symbol", 0, 12)); // NOI18N
+        jLabel8.setText("Nomor Rekening Tujuan");
+
+        NomorRekeningTujuan.addActionListener(this::NomorRekeningTujuanActionPerformed);
+
+        Batal1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Batal1.setText("Batal");
+        Batal1.addActionListener(this::Batal1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,9 +118,6 @@ public class TransferFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,13 +130,21 @@ public class TransferFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(Jumlahtransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(NamaPenerima, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(NamaPenerima, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(Transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Batal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel8)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(NomorRekeningTujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Cari))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(Transfer)
-                        .addGap(57, 57, 57)
-                        .addComponent(Batal)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                        .addGap(143, 143, 143)
+                        .addComponent(jLabel1)))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +163,13 @@ public class TransferFrame extends javax.swing.JFrame {
                 .addComponent(SaldoSaatini, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NomorRekeningTujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cari, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NamaPenerima, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,11 +177,11 @@ public class TransferFrame extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Jumlahtransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Batal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(Transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Batal1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -180,24 +203,99 @@ public class TransferFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NamaPenerimaActionPerformed
 
-    private void BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BatalActionPerformed
-
-    }//GEN-LAST:event_BatalActionPerformed
+    private void CariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariActionPerformed
+        String nomorTujuan = NomorRekeningTujuan.getText();
+        Nasabah penerima = bank.cariRekening(nomorTujuan);
+        
+        if(penerima != null){
+            NamaPenerima.setText(
+                penerima.getRekening().getNamaPemilik()
+            );
+        } else{
+            NamaPenerima.setText("");
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Rekening tujuan tidak ditemukan!",
+                    "peringatan",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_CariActionPerformed
 
     private void TransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferActionPerformed
-       
+        try{
+            String nomorTujuan = NomorRekeningTujuan.getText();
+            Nasabah penerima = bank.cariRekening(nomorTujuan);
+            
+            if(penerima == null){
+                JOptionPane.showMessageDialog(this,
+                        "Nomor rekening tujuan tidak ditemukan!",
+                        "Transfer Gagal",
+                        JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
+            NamaPenerima.setText(penerima.getRekening().getNamaPemilik());
+            double jumlah = Double.parseDouble(Jumlahtransfer.getText());
+            
+            if(jumlah <= 0){
+                JOptionPane.showMessageDialog(this,
+                        "Jumlah transfer harus lebih dari 0!",
+                        "Peringatan",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            boolean berhasil = nasabah.getRekening().tarik(jumlah);
+            if(!berhasil){
+                JOptionPane.showMessageDialog(this,
+                        "Saldo tidak mencukupi!",
+                        "Transfer Gagal",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            penerima.getRekening().setor(jumlah);
+            NumberFormat rupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+            rupiah.setMaximumFractionDigits(0);
+            rupiah.setMinimumFractionDigits(0);
+            JOptionPane.showMessageDialog(this,
+                    "Tramsfer Berhasil\n" +
+                    "Jumlah transfer: " + rupiah.format(jumlah) +
+                    "\nSaldo sekarang: " + rupiah.format(nasabah.getRekening().getSaldo()));
+                    
+            
+            DashboardFrame dashboard = new DashboardFrame(bank, nasabah);
+            dashboard.setLocationRelativeTo(null);
+            dashboard.setVisible(true);
+            this.dispose();  
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this,
+                      "Masukkan jumlah transfer berupa angka!",
+                       "Input Salah",
+                        JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_TransferActionPerformed
 
+    private void NomorRekeningTujuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorRekeningTujuanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomorRekeningTujuanActionPerformed
+
+    private void Batal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Batal1ActionPerformed
+        DashboardFrame dashboard = new DashboardFrame(bank,nasabah);
+        dashboard.setLocationRelativeTo(null);
+        dashboard.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_Batal1ActionPerformed
 
     public static void main(String args[]) {
-
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Batal;
+    private javax.swing.JButton Batal1;
+    private javax.swing.JButton Cari;
     private javax.swing.JTextField Jumlahtransfer;
     private javax.swing.JTextField NamaPenerima;
     private javax.swing.JTextField NomorRekening;
+    private javax.swing.JTextField NomorRekeningTujuan;
     private javax.swing.JTextField SaldoSaatini;
     private javax.swing.JButton Transfer;
     private javax.swing.JLabel jLabel1;
@@ -207,5 +305,6 @@ public class TransferFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,7 +25,7 @@ public class Main {
         bank.tambahNasabah(nasabah_2);
         
         AuthService auth = new AuthService(bank);
-        LoginFrame loginFrame = new LoginFrame(auth);
+        LoginFrame loginFrame = new LoginFrame(auth, bank);
         loginFrame.setVisible(true);
         loginFrame.setLocationRelativeTo(null);
     }
