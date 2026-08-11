@@ -6,6 +6,7 @@ package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Model.Nasabah;
 import com.mycompany.sistem_bank.Service.Bank;
+import com.mycompany.sistem_bank.Model.Transaksi;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 import java.util.Locale;
@@ -29,7 +30,6 @@ public class TransferFrame extends javax.swing.JFrame {
         NomorRekening.setText(
                 nasabah.getRekening().getNomorRekening()
         );
-        
         NumberFormat rupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
         rupiah.setMaximumFractionDigits(0);
         rupiah.setMinimumFractionDigits(0);
@@ -187,23 +187,23 @@ public class TransferFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NomorRekeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorRekeningActionPerformed
+    private void NomorRekeningActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomorRekeningActionPerformed
+    }
 
-    private void SaldoSaatiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaldoSaatiniActionPerformed
+    private void SaldoSaatiniActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_SaldoSaatiniActionPerformed
+    }
 
-    private void JumlahtransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JumlahtransferActionPerformed
+    private void JumlahtransferActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_JumlahtransferActionPerformed
+    }
 
-    private void NamaPenerimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaPenerimaActionPerformed
+    private void NamaPenerimaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_NamaPenerimaActionPerformed
+    }
 
-    private void CariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariActionPerformed
+    private void CariActionPerformed(java.awt.event.ActionEvent evt) {
         String nomorTujuan = NomorRekeningTujuan.getText();
         Nasabah penerima = bank.cariRekening(nomorTujuan);
         
@@ -219,9 +219,9 @@ public class TransferFrame extends javax.swing.JFrame {
                     javax.swing.JOptionPane.WARNING_MESSAGE
             );
         }
-    }//GEN-LAST:event_CariActionPerformed
+    }
 
-    private void TransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferActionPerformed
+    private void TransferActionPerformed(java.awt.event.ActionEvent evt) {
         try{
             String nomorTujuan = NomorRekeningTujuan.getText();
             Nasabah penerima = bank.cariRekening(nomorTujuan);
@@ -252,6 +252,10 @@ public class TransferFrame extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            Transaksi transaksi = new Transaksi(
+                   "TRX-" + System.currentTimeMillis(), "Transfer", jumlah
+            );
+            bank.tambahTransaksi(transaksi);
             penerima.getRekening().setor(jumlah);
             NumberFormat rupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
             rupiah.setMaximumFractionDigits(0);
@@ -272,24 +276,24 @@ public class TransferFrame extends javax.swing.JFrame {
                        "Input Salah",
                         JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_TransferActionPerformed
+    }
 
-    private void NomorRekeningTujuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorRekeningTujuanActionPerformed
+    private void NomorRekeningTujuanActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomorRekeningTujuanActionPerformed
+    }
 
-    private void Batal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Batal1ActionPerformed
+    private void Batal1ActionPerformed(java.awt.event.ActionEvent evt) {
         DashboardFrame dashboard = new DashboardFrame(bank,nasabah);
         dashboard.setLocationRelativeTo(null);
         dashboard.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_Batal1ActionPerformed
+    }
 
     public static void main(String args[]) {
        
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+   
     private javax.swing.JButton Batal1;
     private javax.swing.JButton Cari;
     private javax.swing.JTextField Jumlahtransfer;
@@ -306,5 +310,5 @@ public class TransferFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    // End of variables declaration//GEN-END:variables
+    
 }

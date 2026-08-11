@@ -7,7 +7,6 @@ package com.mycompany.sistem_bank.View;
 import com.mycompany.sistem_bank.Service.AuthService;
 import com.mycompany.sistem_bank.Service.Bank;
 import com.mycompany.sistem_bank.View.DashboardFrame;
-import javax.swing.JOptionPane;
 import com.mycompany.sistem_bank.Model.Nasabah;
 import javax.swing.JOptionPane;
 
@@ -111,9 +110,9 @@ public class LoginFrame extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
-    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {
         String username = Username.getText();
         String password = Password.getText();
         
@@ -131,15 +130,15 @@ public class LoginFrame extends javax.swing.JFrame {
                     "Login Gagal",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_LoginActionPerformed
+    }
 
-    private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
+    private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {
         Password.requestFocus();
-    }//GEN-LAST:event_UsernameActionPerformed
+    }
 
-    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
+    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {
         Login.doClick();
-    }//GEN-LAST:event_PasswordActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -148,7 +147,7 @@ public class LoginFrame extends javax.swing.JFrame {
         
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton Login;
     private javax.swing.JTextField Password;
     private javax.swing.JTextField Username;
@@ -156,5 +155,5 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    // End of variables declaration//GEN-END:variables
+    
 }

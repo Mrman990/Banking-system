@@ -4,18 +4,21 @@
  */
 package com.mycompany.sistem_bank.Model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Transaksi {
     private String idTransaksi;
     private String jenis;
     private double jumlah;
-    private String tanggal;
+    private Date tanggal;
     
-    public Transaksi(String idTransaksi, String jenis, double jumlah, String tanggal){
+    
+    public Transaksi(String idTransaksi, String jenis, double jumlah){
         this.idTransaksi = idTransaksi;
         this.jenis = jenis;
         this.jumlah = jumlah;
-        this.tanggal = tanggal;
+        this.tanggal = new Date();
     }
     
     public String getIdTransaksi(){
@@ -27,9 +30,15 @@ public class Transaksi {
     public double getJumlah(){
         return jumlah;
     }
-    public String getTanggal(){
+    public Date getTanggal(){
         return tanggal;
     }
+    public String getTanggalFormat() {
+    SimpleDateFormat format =
+            new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+    return format.format(tanggal);
+}
     
     public void tampilkanTransaksi() {
         System.out.println("ID Transaksi : " + idTransaksi);

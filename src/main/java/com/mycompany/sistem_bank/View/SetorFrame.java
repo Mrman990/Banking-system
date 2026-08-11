@@ -5,6 +5,7 @@
 package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Model.Nasabah;
+import com.mycompany.sistem_bank.Model.Transaksi;
 import com.mycompany.sistem_bank.Service.Bank;
 import javax.swing.JOptionPane;
 import java.text.NumberFormat;
@@ -137,15 +138,15 @@ public class SetorFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JumlahSetoranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JumlahSetoranActionPerformed
+    private void JumlahSetoranActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_JumlahSetoranActionPerformed
+    }
 
-    private void SaldoSaatiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaldoSaatiniActionPerformed
+    private void SaldoSaatiniActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_SaldoSaatiniActionPerformed
+    }
 
-    private void SetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetorActionPerformed
+    private void SetorActionPerformed(java.awt.event.ActionEvent evt) {
          try{
             double jumlah = Double.parseDouble(JumlahSetoran.getText());
             
@@ -157,6 +158,10 @@ public class SetorFrame extends javax.swing.JFrame {
             return;
             }
             nasabah.getRekening().setor(jumlah);
+            Transaksi transaksi = new Transaksi(
+                    "TRX-" + System.currentTimeMillis(), "Setor", jumlah
+            );
+            bank.tambahTransaksi(transaksi); 
             NumberFormat rupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
             rupiah.setMaximumFractionDigits(0);
             rupiah.setMinimumFractionDigits(0);
@@ -176,14 +181,14 @@ public class SetorFrame extends javax.swing.JFrame {
                     "Input salah",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_SetorActionPerformed
+    }
 
-    private void BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BatalActionPerformed
+    private void BatalActionPerformed(java.awt.event.ActionEvent evt) {
         DashboardFrame dashboard = new DashboardFrame(bank,nasabah);
         dashboard.setLocationRelativeTo(null);
         dashboard.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_BatalActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -192,7 +197,7 @@ public class SetorFrame extends javax.swing.JFrame {
 
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton Batal;
     private javax.swing.JTextField JumlahSetoran;
     private javax.swing.JTextField NamaPemilik;
@@ -204,5 +209,5 @@ public class SetorFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    // End of variables declaration//GEN-END:variables
+   
 }

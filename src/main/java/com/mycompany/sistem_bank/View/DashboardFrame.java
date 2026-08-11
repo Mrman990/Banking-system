@@ -192,52 +192,55 @@ public class DashboardFrame extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
-    private void NamaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaUserActionPerformed
+    private void NamaUserActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_NamaUserActionPerformed
+    }
 
-    private void NomorRekeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorRekeningActionPerformed
+    private void NomorRekeningActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomorRekeningActionPerformed
+    }
 
-    private void SaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaldoActionPerformed
+    private void SaldoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_SaldoActionPerformed
+    }
 
-    private void SetorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetorActionPerformed
+    private void SetorActionPerformed(java.awt.event.ActionEvent evt) {
         SetorFrame setorFrame = new SetorFrame(bank,nasabah);
         setorFrame.setLocationRelativeTo(null);
         setorFrame.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_SetorActionPerformed
+    }
 
-    private void TarikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TarikActionPerformed
+    private void TarikActionPerformed(java.awt.event.ActionEvent evt) {
        TarikFrame tarikFrame = new TarikFrame(bank, nasabah);
        tarikFrame.setLocationRelativeTo(null);
        tarikFrame.setVisible(true);
        this.dispose();
-    }//GEN-LAST:event_TarikActionPerformed
+    }
 
-    private void TransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferActionPerformed
+    private void TransferActionPerformed(java.awt.event.ActionEvent evt) {
         TransferFrame transfer = new TransferFrame(bank, nasabah);
         transfer.setLocationRelativeTo(null);
         transfer.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_TransferActionPerformed
+    }
 
-    private void RiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RiwayatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RiwayatActionPerformed
+    private void RiwayatActionPerformed(java.awt.event.ActionEvent evt) {
+       RiwayatFrame riwayat = new RiwayatFrame(bank, nasabah);
+       riwayat.setLocationRelativeTo(null);
+       riwayat.setVisible(true);
+       this.dispose();
+    }
 
-    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {
         AuthService auth = new AuthService(bank);
         LoginFrame Keluar = new LoginFrame(auth, bank);
         Keluar.setLocationRelativeTo(null);
         Keluar.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_LogoutActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -246,7 +249,7 @@ public class DashboardFrame extends javax.swing.JFrame {
       
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JTextField JenisRekening;
     private javax.swing.JButton Logout;
     private javax.swing.JTextField NamaUser;
@@ -262,5 +265,5 @@ public class DashboardFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    // End of variables declaration//GEN-END:variables
+    
 }

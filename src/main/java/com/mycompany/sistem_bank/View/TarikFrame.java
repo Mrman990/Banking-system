@@ -6,6 +6,7 @@ package com.mycompany.sistem_bank.View;
 
 import com.mycompany.sistem_bank.Model.Nasabah;
 import com.mycompany.sistem_bank.Service.Bank;
+import com.mycompany.sistem_bank.Model.Transaksi;
 import javax.swing.JOptionPane;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -141,7 +142,7 @@ public class TarikFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TarikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TarikActionPerformed
+    private void TarikActionPerformed(java.awt.event.ActionEvent evt) {
         try{
             double jumlah = Double.parseDouble(JumlahTariktunai.getText());
             
@@ -153,7 +154,10 @@ public class TarikFrame extends javax.swing.JFrame {
                 return;  
             }
             boolean berhasil = nasabah.getRekening().tarik(jumlah);
-            
+            Transaksi transaksi = new Transaksi(
+                    "TRX-" + System.currentTimeMillis(), "Tarik", jumlah
+            );
+            bank.tambahTransaksi(transaksi);
             if(berhasil){
                 JOptionPane.showMessageDialog(this,
                         "Penarikan berhasil!\nSaldo sekarang : Rp "
@@ -173,30 +177,30 @@ public class TarikFrame extends javax.swing.JFrame {
                     "Input Salah",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_TarikActionPerformed
+    }
 
-    private void BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BatalActionPerformed
+    private void BatalActionPerformed(java.awt.event.ActionEvent evt) {
         DashboardFrame dashboard = new DashboardFrame(bank, nasabah);
         dashboard.setLocationRelativeTo(null);
         dashboard.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_BatalActionPerformed
+    }
 
-    private void NomorRekeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorRekeningActionPerformed
+    private void NomorRekeningActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomorRekeningActionPerformed
+    }
 
-    private void NomorPemilikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomorPemilikActionPerformed
+    private void NomorPemilikActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomorPemilikActionPerformed
+    }
 
-    private void SaldoSaatiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaldoSaatiniActionPerformed
+    private void SaldoSaatiniActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_SaldoSaatiniActionPerformed
+    }
 
-    private void JumlahTariktunaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JumlahTariktunaiActionPerformed
+    private void JumlahTariktunaiActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_JumlahTariktunaiActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -205,7 +209,7 @@ public class TarikFrame extends javax.swing.JFrame {
 
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton Batal;
     private javax.swing.JTextField JumlahTariktunai;
     private javax.swing.JTextField NomorPemilik;
@@ -217,5 +221,5 @@ public class TarikFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    // End of variables declaration//GEN-END:variables
+    
 }
